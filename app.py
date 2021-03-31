@@ -560,3 +560,56 @@ if __name__ == '__main__':
             # update results with blacklist items
             # results.update(filter(lambda x: x[1]!='', eval_lists(key).items()))   
     # print(results)
+
+   
+
+
+
+
+#     def check_mxtoolbox(domain):
+#     """Check if the provided domain is blacklisted as spam as determined by MX Toolkit."""
+#     issues = []
+#     mxtoolbox_url = 'https://mxtoolbox.com/Public/Tools/BrandReputation.aspx'
+#     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36', 
+#                 'Origin': mxtoolbox_url, 
+#                 'Referer': mxtoolbox_url}  
+#     try:
+#         response = requests.Session().get(url=mxtoolbox_url, headers=headers)
+#         soup = BeautifulSoup(response.content, 'lxml')
+#         viewstate = soup.select('input[name=__VIEWSTATE]')[0]['value']
+#         viewstategenerator = soup.select('input[name=__VIEWSTATEGENERATOR]')[0]['value']
+#         eventvalidation = soup.select('input[name=__EVENTVALIDATION]')[0]['value']
+#         data = {
+#                 '__EVENTTARGET': '', 
+#                 '__EVENTARGUMENT': '', 
+#                 '__VIEWSTATE': viewstate, 
+#                 '__VIEWSTATEGENERATOR': viewstategenerator, 
+#                 '__EVENTVALIDATION': eventvalidation, 
+#                 'ctl00$ContentPlaceHolder1$brandReputationUrl': domain, 
+#                 'ctl00$ContentPlaceHolder1$brandReputationDoLookup': 'Brand Reputation Lookup', 
+#                 'ctl00$ucSignIn$hfRegCode': 'missing', 
+#                 'ctl00$ucSignIn$hfRedirectSignUp': '/Public/Tools/BrandReputation.aspx', 
+#                 'ctl00$ucSignIn$hfRedirectLogin': '', 
+#                 'ctl00$ucSignIn$txtEmailAddress': '', 
+#                 'ctl00$ucSignIn$cbNewAccount': 'cbNewAccount', 
+#                 'ctl00$ucSignIn$txtFullName': '', 
+#                 'ctl00$ucSignIn$txtModalNewPassword': '', 
+#                 'ctl00$ucSignIn$txtPhone': '', 
+#                 'ctl00$ucSignIn$txtCompanyName': '', 
+#                 'ctl00$ucSignIn$drpTitle': '', 
+#                 'ctl00$ucSignIn$txtTitleName': '', 
+#                 'ctl00$ucSignIn$txtModalPassword': ''
+#         }
+#         response = requests.Session().post(url=mxtoolbox_url, headers=headers, data=data)
+#         soup = BeautifulSoup(response.content, 'lxml')
+#         print(soup)
+#         if soup.select('div[id=ctl00_ContentPlaceHolder1_noIssuesFound]'):
+#             issues.append('No issues found')
+#         else:
+#             if soup.select('div[id=ctl00_ContentPlaceHolder1_googleSafeBrowsingIssuesFound]'):
+#                 issues.append('Google SafeBrowsing Issues Found.')
+#             if soup.select('div[id=ctl00_ContentPlaceHolder1_phishTankIssuesFound]'):
+#                 issues.append('PhishTank Issues Found')
+#     except Exception as error:
+#         print('[!] Error retrieving Google SafeBrowsing and PhishTank reputation!', error)
+#     return issues
